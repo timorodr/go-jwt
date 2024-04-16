@@ -121,7 +121,8 @@ func Login(c *gin.Context) {
 		return
 	}
 	// send it back
-	c.JSON(http.StatusOK, gin.H{
-		"token": tokenString,
-	})
+	c.SetSameSite(http.SameSiteLaxMode)
+	c.SetCookie("Authorization", tokenString, 3600*24*30, "", "", false, true) // look into changing arguments here false -> true for deployment?
+
+	c.JSON(http.StatusOK, gin.H{})
 }
