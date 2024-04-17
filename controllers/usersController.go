@@ -35,7 +35,7 @@ func Signup(c *gin.Context) {
 
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{
-			"error": "Failed to has password",
+			"error": "Failed to hash password",
 		})
 		return
 	}
@@ -125,4 +125,14 @@ func Login(c *gin.Context) {
 	c.SetCookie("Authorization", tokenString, 3600*24*30, "", "", false, true) // look into changing arguments here false -> true for deployment?
 
 	c.JSON(http.StatusOK, gin.H{})
+}
+
+func Validate(c *gin.Context){
+	user, _ := c.Get("user")
+
+
+
+	c.JSON(http.StatusOK, gin.H{
+		"message": user.(models.User),
+	})
 }
