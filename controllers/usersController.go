@@ -15,6 +15,15 @@ import (
 	"golang.org/x/crypto/bcrypt"
 )
 
+
+func HelloWorldHandler(c *gin.Context) {
+	resp := make(map[string]string)
+	resp["message"] = "Hello World"
+
+	c.JSON(http.StatusOK, resp)
+}
+
+
 func Signup(c *gin.Context) {
 	//Get the email and password off req body
 	var body struct {
@@ -133,6 +142,6 @@ func Validate(c *gin.Context){
 
 
 	c.JSON(http.StatusOK, gin.H{
-		"message": user.(models.User),
+		"message": user,
 	})
 }

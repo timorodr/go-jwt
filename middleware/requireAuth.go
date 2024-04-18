@@ -61,7 +61,7 @@ func RequireAuth(c *gin.Context) {
 		var user models.User
 		client := initializers.ConnectToDb()
 		collection := client.Database("jwtauth").Collection("users")
-		collection.FindOne(context.Background(), bson.M{"id": claims["sub"].(string)}).Decode(&user)
+		collection.FindOne(context.Background(), bson.M{"_id": claims["sub"].(string)}).Decode(&user)
 
 		// if user.ID ==  {
 		// 	c.AbortWithStatus(http.StatusUnauthorized)
